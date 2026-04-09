@@ -445,7 +445,7 @@ export default function Employees() {
 
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">
-          {role === "Admin" && "User Management"}
+          {role === "Admin" && "Workforce Management"}
           {role === "Manager" && "Department Employees"}
           {role === "Employee" && "My Department"}
         </h1>
@@ -863,4 +863,3 @@ export default function Employees() {
     </div>
   );
 }
-

@@ -52,12 +52,12 @@ const Signin = () => {
       <div className="w-full max-w-md p-8 bg-(--surface) rounded-3xl border border-(--border) shadow-(--shadow-strong)">
         <div className="mb-6 text-center">
           <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-(--accent) text-white font-semibold shadow-(--shadow-soft)">
-            RB
+            NE
           </div>
 
           <h2 className="text-2xl font-semibold">Welcome back</h2>
           <p className="text-sm text-(--text-muted)">
-            Sign in to your RBAC Studio workspace.
+            Sign in to your NEST workspace.
           </p>
         </div>
 

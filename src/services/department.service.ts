@@ -2,7 +2,6 @@ import { API_BASE_URL } from "../api/baseUrl";
 
 type UpdateDepartmentParams = {
   name?: string;
-  managerId?: string | null;
 };
 
 const getAuthToken = () => {
