@@ -28,7 +28,6 @@ interface User {
   isActive: boolean;
   department?: Department;
   createdAt?: string;
-  cognitoStatus?: string | null;
 }
 
 type CreateForm = {
@@ -864,5 +863,4 @@ export default function Employees() {
     </div>
   );
 }
-
 

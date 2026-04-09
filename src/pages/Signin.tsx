@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import {
-  loginWithCognito,
-  respondToNewPasswordChallenge,
-} from "../api/cognitoAuth";
+import { login } from "../api/authApi";
 
 const Signin = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { signIn } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -16,12 +14,8 @@ const Signin = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const [challengeSession, setChallengeSession] = useState<string | null>(null);
-  const [challengeRequired, setChallengeRequired] = useState<string[]>([]);
-  const [newPassword, setNewPassword] = useState("");
-  const [challengeGender, setChallengeGender] = useState("");
-  const [challengeName, setChallengeName] = useState("");
+  const redirectPath = (location.state as { from?: { pathname?: string } } | null)?.from
+    ?.pathname;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,25 +26,6 @@ const Signin = () => {
     if (!email.trim()) newErrors.email = "Email is required";
     if (!password.trim()) newErrors.password = "Password is required";
 
-    if (challengeSession) {
-      if (!newPassword.trim())
-        newErrors.newPassword = "New password is required";
-
-      if (
-        challengeRequired.includes("userAttributes.gender") &&
-        !challengeGender.trim()
-      ) {
-        newErrors.gender = "Gender is required";
-      }
-
-      if (
-        challengeRequired.includes("userAttributes.name") &&
-        !challengeName.trim()
-      ) {
-        newErrors.name = "Name is required";
-      }
-    }
-
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) return;
@@ -58,49 +33,14 @@ const Signin = () => {
     setLoading(true);
 
     try {
-      if (challengeSession) {
-        const token = await respondToNewPasswordChallenge(
-          email,
-          newPassword,
-          challengeSession,
-          {
-            gender: challengeGender,
-            name: challengeName,
-          }
-        );
-
-        signIn({ token, user: { email } });
-
-        setChallengeSession(null);
-        setChallengeRequired([]);
-        setNewPassword("");
-        setChallengeGender("");
-        setChallengeName("");
-
-        navigate("/dashboard");
-        return;
-      }
-
-      const result = await loginWithCognito(email, password);
-
-      if ("challenge" in result) {
-        setChallengeSession(result.challenge.session);
-        setChallengeRequired(result.challenge.requiredAttributes);
-        setErrorMessage(
-          "Password update required. Please set a new password."
-        );
-        return;
-      }
-
-      const token = result.token;
-
-      signIn({ token, user: { email } });
-
-      navigate("/dashboard");
+      const result = await login(email, password);
+      signIn(result);
+      navigate(redirectPath || "/dashboard", { replace: true });
     } catch (err: any) {
-      const message = err?.message || "";
       setErrorMessage(
-        message || "Cognito login failed. Please check your credentials."
+        err instanceof Error 
+          ? err.message 
+          : "Login failed. Please check your credentials."
       );
     } finally {
       setLoading(false);
@@ -128,70 +68,42 @@ const Signin = () => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-3 border rounded-xl"
+            className={`w-full px-4 py-3 border rounded-xl bg-(--surface) text-(--text) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 transition ${
+              errors.email
+                ? "border-red-500 focus:ring-red-400"
+                : "border-(--border) focus:ring-(--accent-strong)"
+            }`}
           />
+          {errors.email && (
+            <p className="text-sm text-red-500">{errors.email}</p>
+          )}
 
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-3 border rounded-xl"
+            className={`w-full px-4 py-3 border rounded-xl bg-(--surface) text-(--text) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 transition ${
+              errors.password
+                ? "border-red-500 focus:ring-red-400"
+                : "border-(--border) focus:ring-(--accent-strong)"
+            }`}
           />
-
-          {challengeSession && (
-            <>
-              <input
-                type="password"
-                placeholder="New Password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full px-4 py-3 border rounded-xl"
-              />
-
-              <select
-                value={challengeGender}
-                onChange={(e) => setChallengeGender(e.target.value)}
-                className="w-full px-4 py-3 border rounded-xl"
-              >
-                <option value="">Select Gender</option>
-                <option value="female">Female</option>
-                <option value="male">Male</option>
-                <option value="other">Other</option>
-              </select>
-
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={challengeName}
-                onChange={(e) => setChallengeName(e.target.value)}
-                className="w-full px-4 py-3 border rounded-xl"
-              />
-            </>
+          {errors.password && (
+            <p className="text-sm text-red-500">{errors.password}</p>
           )}
 
           <button type="submit"
             disabled={loading}
             className="w-full py-3 text-white bg-(--accent) rounded-xl"
           >
-            {loading
-              ? "Signing in..."
-              : challengeSession
-              ? "Set New Password"
-              : "Sign In"}
+            {loading ? "Signing in..." : "Sign In"}
           </button>
 
           {errorMessage && (
             <p className="text-sm text-center text-red-500">{errorMessage}</p>
           )}
 
-          <p className="text-sm text-center mt-2 text-(--text-muted)">
-            <span
-            onClick={() =>navigate("/signup")}
-            className="text-(--accent) cursor-pointer hover:underline">
-            Don't have an account?{' '}
-            </span>
-          </p>
           <p className="text-sm text-right mt-2 text-(--text-muted)">
             <span
               onClick={() => navigate("/forget-password")}

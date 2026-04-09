@@ -56,13 +56,6 @@ const extractRoleFromTokenPayload = (payload: any): string | null => {
   if (!payload) return null;
   const direct = extractRoleValue(payload?.role);
   if (direct) return direct;
-
-  const cognitoGroups = payload?.["cognito:groups"];
-  if (Array.isArray(cognitoGroups) && cognitoGroups.length > 0) {
-    const group = cognitoGroups[0];
-    return typeof group === "string" ? group : null;
-  }
-
   return null;
 };
 
@@ -78,9 +71,7 @@ const extractUserName = (user?: AuthUser | null) => {
 const extractNameFromTokenPayload = (payload: any): string | null => {
   if (!payload) return null;
   const candidates = [
-    payload?.name,
-    payload?.given_name,
-    payload?.preferred_username,
+    payload?.username,
     payload?.email,
   ];
   for (const candidate of candidates) {

@@ -18,18 +18,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
-        {/* Public Routes */}
-        <Route path="/" element={<Navigate to="/signin" />} />
-
-        {/* Public Routes */}
         <Route path="/" element={<Navigate to="/signin" />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/forget-password" element={<ForgetPassword />} />
 
-
-        {/* Protected Dashboard */}
         <Route
           path="/dashboard"
           element={
@@ -81,15 +74,10 @@ function App() {
         />
 
         <Route path="/error" element={<ErrorPage />} />
-        {/* Error Routes */}
-        <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<NotFoundPage />} />
-
-
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
-
