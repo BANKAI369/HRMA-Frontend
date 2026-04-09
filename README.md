@@ -1,10 +1,11 @@
-This is a React + Typescript frontend built using Vite.
-It is a client application for the User Management backend(RBAC).
+This is a React + TypeScript frontend built using Vite.
+It is the client application for the NEST backend.
 
-As of now 
-it only verifies backend connectivity.
-is prepared for future screens such as Roles, Permissions, and Auth flows.
-Tailwind CSS configured.
+As of now:
+- the frontend is integrated with the backend services
+- core authentication flows are working
+- the app includes dashboards, workforce management, and department flows
+- Tailwind CSS is configured
 
 Tech Stack
 React
@@ -13,6 +14,6 @@ Vite
 Tailwind CSS
 Fetch API / Axios (for API calls)
 
-WEEK:4  Frontend  integraion with backend
-implementation:
-        Signup,login and forget password are have fully integrated and running
+WEEK 4: Frontend integration with backend
+Implementation:
+- signup, login, and forgot password are integrated and running

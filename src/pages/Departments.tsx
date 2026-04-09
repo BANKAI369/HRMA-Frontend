@@ -7,6 +7,11 @@ import {
 } from "../services/department.service";
 import { Trash } from "lucide-react";
 
+interface Role {
+  id?: string;
+  name: Roles;
+}
+
 interface Department {
   id: string;
   name: string;
@@ -17,7 +22,7 @@ interface User {
   id: string;
   username: string;
   email: string;
-  roles: Roles[];
+  role?: Role | null;
   isActive: boolean;
   department?: Department;
 }
@@ -161,7 +166,6 @@ export default function Departments() {
     </div>
   );
 }
-
 
 
 

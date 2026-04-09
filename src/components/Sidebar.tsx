@@ -21,7 +21,7 @@ export default function Sidebar({ role }: SidebarProps) {
       path:"/dashboard",
     },
     {
-      name: "User Management",
+      name: "Workforce",
       icon: <Briefcase size={18} />,
       roles: ["Admin", "Manager", "Employee"],
       path:"/employees",
@@ -57,11 +57,11 @@ const handleLogOut = () => {
       <div className="flex h-20 items-center justify-between border-b border-(--border) px-6">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-2xl bg-(--accent) text-white flex items-center justify-center font-semibold shadow-(--shadow-soft)">
-            RB
+            NE
           </div>
           <div>
             <div className="text-sm uppercase tracking-[0.2em] text-(--text-muted)">Console</div>
-            <div className="text-lg font-semibold leading-tight">RBAC Studio</div>
+            <div className="text-lg font-semibold leading-tight">NEST Console</div>
           </div>
         </div>
       </div>

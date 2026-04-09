@@ -153,7 +153,7 @@ export default function Dashboard() {
           </div>
           <h1 className="text-2xl font-semibold">Welcome back.</h1>
           <p className="text-(--text-muted)">
-            Role-based metrics curated for {role || "your"} workspace.
+            NEST metrics curated for {role || "your"} workspace.
           </p>
           {role === "Manager" && currentDepartment && (
             <p className="mt-2 text-sm font-medium text-(--accent)">
