@@ -13,12 +13,15 @@ import Departments from "./pages/Departments";
 import Employees from "./pages/Employees";
 import Projects from "./pages/Projects";
 import Settings from "./pages/Settings";
+import LandingPage from "./pages/LandingPage";
+
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/signin" />} />
+        
+        <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/forget-password" element={<ForgetPassword />} />

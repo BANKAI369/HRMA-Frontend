@@ -91,10 +91,10 @@ export default function Departments() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div>
-        <h1 className="text-2xl font-semibold">Departments</h1>
-        <p className="text-(--text-muted)">Manage company departments</p>
+        <h1 className="text-xl font-semibold">Departments</h1>
+        <p className="text-[13px] text-(--text-muted)">Manage company departments</p>
       </div>
 
       {error && (
@@ -104,18 +104,18 @@ export default function Departments() {
       )}
 
       {/* Create Department */}
-      <div className="flex flex-wrap gap-3 rounded-lg bg-(--surface) p-4 shadow">
+      <div className="ds-card flex flex-wrap gap-3 p-4">
         <input
           type="text"
           placeholder="Department name..."
           value={newDepartment}
           onChange={(e) => setNewDepartment(e.target.value)}
-          className="border border-(--border) bg-(--surface) text-(--text) placeholder:text-(--text-muted) px-3 py-2 rounded-lg w-64"
+          className="h-9 w-64 rounded-lg border border-(--border) bg-(--surface) px-3 text-(--text) placeholder:text-(--text-muted)"
         />
 
         <button
           onClick={createDepartment}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 cursor-pointer disabled:cursor-not-allowed"
+          className="ds-button ds-button-primary h-8 cursor-pointer px-3 text-sm disabled:cursor-not-allowed disabled:opacity-60"
           disabled={newDepartment.trim() === ""}
         >
           + Add Department
@@ -123,30 +123,30 @@ export default function Departments() {
       </div>
 
       {/* Department Table */}
-      <div className="overflow-x-auto rounded-lg bg-(--surface) shadow">
-        <table className="w-full min-w-[640px] text-left">
+      <div className="ds-card overflow-x-auto">
+        <table className="w-full min-w-[640px] text-left text-[13px]">
           <thead className="bg-(--surface-2)">
             <tr>
-              <th className="p-3">S.No</th>
-              <th className="p-3">Department Name</th>
-              <th className="p-3">Manager</th>
-              <th className="p-3">Actions</th>
+              <th className="h-10 px-3 py-2">S.No</th>
+              <th className="h-10 px-3 py-2">Department Name</th>
+              <th className="h-10 px-3 py-2">Manager</th>
+              <th className="h-10 px-3 py-2">Actions</th>
             </tr>
           </thead>
 
           <tbody>
             {departments.map((dept, index) => (
               <tr key={dept.id} className="border-t border-(--border) hover:bg-(--surface-2)">
-                <td className="p-3">{index + 1}</td>
+                <td className="h-10 px-3 py-2">{index + 1}</td>
 
-                <td className="p-3 font-medium">{dept.name}</td>
+                <td className="h-10 px-3 py-2 font-medium">{dept.name}</td>
 
-                <td className="p-3">{dept.manager?.username || "Unassigned"}</td>
+                <td className="h-10 px-3 py-2">{dept.manager?.username || "Unassigned"}</td>
 
-                <td className="p-3">
+                <td className="h-10 px-3 py-2">
                   <button
                     onClick={() => deleteDepartment(dept.id)}
-                    className="inline-flex items-center gap-2 text-red-600 hover:underline"
+                    className="inline-flex items-center gap-2 text-(--danger) hover:underline"
                   >
                     <Trash size={14}/>
                     Delete
@@ -158,7 +158,7 @@ export default function Departments() {
         </table>
 
         {departments.length === 0 && (
-          <div className="text-center p-6 text-(--text-muted)">
+          <div className="h-10 px-3 py-2 text-center text-(--text-muted)">
             No departments found
           </div>
         )}

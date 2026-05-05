@@ -15,7 +15,7 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
       onClick={toggleTheme}
       className={
         className ||
-        "inline-flex h-9 w-9 items-center justify-center rounded-full border border-(--border) bg-(--surface) text-(--text) shadow-sm transition hover:bg-[var(--surface-2)]"
+        "inline-flex h-9 w-9 items-center justify-center rounded-lg border border-(--border) bg-(--surface) text-(--text) shadow-sm transition hover:bg-[var(--surface-2)]"
       }
     >
       {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
