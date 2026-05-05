@@ -11,20 +11,16 @@ export default function DashboardLayout({ children }: Props) {
   const { role } = useAuth();
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-(--bg) text-(--text)">
+    <div className="min-h-screen overflow-x-hidden bg-[#f7f9fb] text-[13px] text-(--text)">
 
-      {/* Sidebar */}
       <Sidebar role={role} />
 
-      {/* Right Side */}
-      <div className="ml-72 min-h-screen min-w-0 overflow-x-hidden">
+      <div className="ml-20 min-h-screen min-w-0 overflow-x-hidden">
 
-        {/* Navbar */}
         <Navbar />
 
-        {/* Main Content */}
-        <main className="px-4 pb-6 pt-[96px]">
-          <div className="mx-auto w-full max-w-6xl space-y-6">
+        <main className="px-4 pb-8 pt-16 md:px-5">
+          <div className="w-full">
             {children}
           </div>
         </main>

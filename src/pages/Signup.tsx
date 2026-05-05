@@ -47,25 +47,25 @@ const Signup: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-(--bg) text-(--text) px-4">
-      <div className="w-full max-w-md bg-(--surface) border border-(--border) shadow-(--shadow-strong) rounded-3xl p-8">
-        <div className="mb-6 text-center">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-(--accent) text-white font-semibold shadow-(--shadow-soft)">
-            RB
+      <div className="ds-card w-full max-w-md p-3 shadow-(--shadow-strong) md:p-4">
+        <div className="mb-4 text-center">
+          <div className="mx-auto mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-(--primary) text-[12px] font-bold text-white shadow-(--shadow-soft)">
+            NE
           </div>
-          <h2 className="text-3xl font-semibold">Create your account</h2>
+          <h2 className="text-xl font-semibold">Create your account</h2>
           <p className="text-sm text-(--text-muted)">
             Start managing teams and access in minutes.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <input
               type="text"
               placeholder="Full Name"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className={`w-full px-4 py-3 border rounded-xl bg-(--surface) text-(--text) placeholder:text-(--text-muted) focus:ring-2 focus:outline-none transition ${
+              className={`h-9 w-full rounded-xl border bg-(--surface) px-3 text-(--text) placeholder:text-(--text-muted) transition focus:outline-none focus:ring-2 ${
                 errors.username
                   ? "border-red-500 focus:ring-red-400"
                   : "border-(--border) focus:ring-(--accent-strong)"
@@ -82,7 +82,7 @@ const Signup: React.FC = () => {
               placeholder="Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`w-full px-4 py-3 border rounded-xl bg-(--surface) text-(--text) placeholder:text-(--text-muted) focus:ring-2 focus:outline-none transition ${
+              className={`h-9 w-full rounded-xl border bg-(--surface) px-3 text-(--text) placeholder:text-(--text-muted) transition focus:outline-none focus:ring-2 ${
                 errors.email
                   ? "border-red-500 focus:ring-red-400"
                   : "border-(--border) focus:ring-(--accent-strong)"
@@ -99,7 +99,7 @@ const Signup: React.FC = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={`w-full px-4 py-3 border rounded-xl bg-(--surface) text-(--text) placeholder:text-(--text-muted) focus:ring-2 focus:outline-none transition ${
+              className={`h-9 w-full rounded-xl border bg-(--surface) px-3 text-(--text) placeholder:text-(--text-muted) transition focus:outline-none focus:ring-2 ${
                 errors.password
                   ? "border-red-500 focus:ring-red-400"
                   : "border-(--border) focus:ring-(--accent-strong)"
@@ -113,7 +113,7 @@ const Signup: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-(--accent) text-white font-semibold hover:bg-(--accent-strong) active:scale-95 transition duration-200"
+            className="ds-button ds-button-primary h-8 w-full px-3 text-sm"
           >
             {loading ? "Creating Account..." : "Sign Up"}
           </button>
@@ -123,7 +123,7 @@ const Signup: React.FC = () => {
           <p
             className={`mt-4 text-center font-medium ${
               message.toLowerCase().includes("successful")
-                ? "text-green-600"
+                ? "text-(--success)"
                 : "text-red-600"
             }`}
           >

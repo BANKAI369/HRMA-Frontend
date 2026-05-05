@@ -62,27 +62,27 @@ export default function ForgetPassword() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-(--bg) text-(--text) px-4">
-      <div className="bg-(--surface) border border-(--border) shadow-(--shadow-strong) rounded-3xl p-8 w-full max-w-md">
-        <div className="mb-6 text-center">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-(--accent) text-white font-semibold shadow-(--shadow-soft)">
-            RB
+      <div className="ds-card w-full max-w-md p-3 shadow-(--shadow-strong) md:p-4">
+        <div className="mb-4 text-center">
+          <div className="mx-auto mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-(--primary) text-[12px] font-bold text-white shadow-(--shadow-soft)">
+            NE
           </div>
-          <h2 className="text-2xl font-semibold">Reset Password</h2>
+          <h2 className="text-xl font-semibold">Reset Password</h2>
           <p className="text-sm text-(--text-muted)">
             Enter your email and a new password to reset your account.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-4 space-y-3">
           <div>
-            <label className="block text-sm font-medium text-(--text-muted)">
+            <label className="block text-[12px] font-medium text-(--text-muted)">
               Email
             </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`mt-1 w-full px-4 py-3 border rounded-xl bg-(--surface) text-(--text) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 transition ${
+              className={`mt-1 h-9 w-full rounded-xl border bg-(--surface) px-3 text-(--text) placeholder:text-(--text-muted) transition focus:outline-none focus:ring-2 ${
                 errors.email
                   ? "border-red-500 focus:ring-red-400"
                   : "border-(--border) focus:ring-(--accent-strong)"
@@ -95,14 +95,14 @@ export default function ForgetPassword() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-(--text-muted)">
+            <label className="block text-[12px] font-medium text-(--text-muted)">
               New Password
             </label>
             <input
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              className={`mt-1 w-full px-4 py-3 border rounded-xl bg-(--surface) text-(--text) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 transition ${
+              className={`mt-1 h-9 w-full rounded-xl border bg-(--surface) px-3 text-(--text) placeholder:text-(--text-muted) transition focus:outline-none focus:ring-2 ${
                 errors.newPassword
                   ? "border-red-500 focus:ring-red-400"
                   : "border-(--border) focus:ring-(--accent-strong)"
@@ -115,14 +115,14 @@ export default function ForgetPassword() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-(--text-muted)">
+            <label className="block text-[12px] font-medium text-(--text-muted)">
               Confirm New Password
             </label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className={`mt-1 w-full px-4 py-3 border rounded-xl bg-(--surface) text-(--text) placeholder:text-(--text-muted) focus:outline-none focus:ring-2 transition ${
+              className={`mt-1 h-9 w-full rounded-xl border bg-(--surface) px-3 text-(--text) placeholder:text-(--text-muted) transition focus:outline-none focus:ring-2 ${
                 errors.confirmPassword
                   ? "border-red-500 focus:ring-red-400"
                   : "border-(--border) focus:ring-(--accent-strong)"
@@ -142,13 +142,13 @@ export default function ForgetPassword() {
             </p>
           )}
           {message && (
-            <p className="text-green-600 text-sm text-center">{message}</p>
+            <p className="text-(--success) text-sm text-center">{message}</p>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-(--accent) text-white py-3 rounded-xl hover:bg-(--accent-strong) transition disabled:opacity-50"
+            className="ds-button ds-button-primary h-8 w-full px-3 text-sm disabled:opacity-50"
           >
             {loading ? "Updating..." : "Update Password"}
           </button>

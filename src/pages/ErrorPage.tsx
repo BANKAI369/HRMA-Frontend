@@ -52,13 +52,13 @@ export default function ErrorPage() {
   }
 
   return (
-    <main className="min-h-screen bg-(--bg) text-(--text) p-8">
-      <h1 className="text-2xl font-semibold">{title}</h1>
+    <main className="min-h-screen bg-(--bg) p-4 text-[13px] text-(--text)">
+      <h1 className="text-xl font-semibold">{title}</h1>
       {status && (
         <p className="text-(--text-muted)">Error code: {status}</p>
       )}
       <p className="mt-2">{message}</p>
-      <a href="/" className="mt-4 inline-block text-blue-600 hover:underline">
+      <a href="/" className="mt-4 inline-block text-(--primary) hover:underline">
         Go home
       </a>
     </main>
