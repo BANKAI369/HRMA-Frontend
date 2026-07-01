@@ -71,6 +71,15 @@ export const dashboardNavItems: DashboardNavItem[] = [
   { label: "Performance", icon: Star },
 ];
 
+<<<<<<< HEAD
+=======
+export const fallbackRecentUsers: DashboardPerson[] = [
+  { id: "fallback-1", username: "Jane Doe", role: "Designer" },
+  { id: "fallback-2", username: "Mike Kim", role: "Engineer" },
+  { id: "fallback-3", username: "Alex Rivera", role: "Manager" },
+];
+
+>>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
 export const dashboardPostTools: DashboardPostTool[] = [
   { label: "Post", icon: FileText },
   { label: "Poll", icon: ClipboardCheck },
@@ -99,7 +108,11 @@ export const dashboardAnnouncements: DashboardAnnouncement[] = [
 export const dashboardMilestones = [
   {
     label: "3 Years",
+<<<<<<< HEAD
     fallbackName: "No recent joiners",
+=======
+    fallbackName: "Alex Rivera",
+>>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
     icon: PartyPopper,
     cardClassName: "bg-[#86f2e4]/30",
     iconClassName: "text-[#006a61]",
@@ -107,7 +120,11 @@ export const dashboardMilestones = [
   },
   {
     label: "New Joiner",
+<<<<<<< HEAD
     fallbackName: "No recent joiners",
+=======
+    fallbackName: "Sarah Chen",
+>>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
     icon: Waves,
     cardClassName: "bg-[#e2dfff]",
     iconClassName: "text-[#3525cd]",

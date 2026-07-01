@@ -1,7 +1,14 @@
 import {
-  LayoutDashboard,Users,FolderKanban,CheckSquare,Settings,LogOut,Briefcase,Building2
+  BarChart3,
+  Home,
+  LogOut,
+  Mail,
+  MessageSquare,
+  UserRound,
+  Users,
+  WalletCards,
+  Building2
 } from "lucide-react";
-
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { AppRole } from "../utils/role";
@@ -10,99 +17,110 @@ interface SidebarProps {
   role: AppRole;
 }
 
+const menuItems = [
+  {
+    name: "Home",
+    icon: Home,
+    roles: ["Admin", "Manager", "Employee"],
+    path: "/dashboard",
+  },
+  {
+    name: "Me",
+    icon: UserRound,
+    roles: ["Admin", "Manager", "Employee"],
+    path: "/employees",
+  },
+  {
+    name: "Inbox",
+    icon: Mail,
+    roles: ["Admin", "Manager", "Employee"],
+    path: "/dashboard",
+  },
+  {
+    name: "My Team",
+    icon: Users,
+    roles: ["Admin", "Manager", "Employee"],
+    path: "/employees",
+  },
+  {
+    name: "My Finances",
+    icon: WalletCards,
+    roles: ["Admin", "Manager", "Employee"],
+    path: "/dashboard",
+  },
+  {
+    name: "Org",
+    icon: Building2,
+    roles: ["Admin"],
+    path: "/departments",
+  },
+  {
+    name: "Engage",
+    icon: MessageSquare,
+    roles: ["Admin", "Manager", "Employee"],
+    path: "/dashboard",
+  },
+  {
+    name: "Performance",
+    icon: BarChart3,
+    roles: ["Manager", "Employee"],
+    path: "/projects",
+  },
+];
+
 export default function Sidebar({ role }: SidebarProps) {
   const { signOut } = useAuth();
   const location = useLocation();
-  const menuItems = [
-    {
-      name: "Dashboard",
-      icon: <LayoutDashboard size={18} />,
-      roles: ["Admin", "Manager", "Employee"],
-      path:"/dashboard",
-    },
-    {
-      name: "Workforce",
-      icon: <Briefcase size={18} />,
-      roles: ["Admin", "Manager", "Employee"],
-      path:"/employees",
-    },
-    {
-      name: "Departments",
-        icon: <Building2 size={18} />,
-        roles: ["Admin"],
-        path: "/departments",
-    },
-    {
-      name: "Projects",
-      icon: <FolderKanban size={18} />,
-      roles: ["Manager", "Employee"],
-      path:"/projects",
-    },
-    {
-      name: "Settings",
-      icon: <Settings size={18} />,
-      roles: ["Admin"],
-      path:"/settings",
-    },
-  ];
-  const Navigate = useNavigate();
-const handleLogOut = () => {
-  signOut();
-  Navigate("/signin");
-};
-  return (
-    <aside className="fixed inset-y-0 left-0 z-40 flex h-screen w-72 shrink-0 flex-col overflow-hidden border-r border-(--border) bg-(--surface) text-(--text)">
+  const navigate = useNavigate();
 
-      {/* Logo */}
-      <div className="flex h-20 items-center justify-between border-b border-(--border) px-6">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-2xl bg-(--accent) text-white flex items-center justify-center font-semibold shadow-(--shadow-soft)">
-            NE
-          </div>
-          <div>
-            <div className="text-sm uppercase tracking-[0.2em] text-(--text-muted)">Console</div>
-            <div className="text-lg font-semibold leading-tight">NEST Console</div>
-          </div>
-        </div>
+  const handleLogOut = () => {
+    signOut();
+    navigate("/signin");
+  };
+
+  return (
+    <aside className="fixed inset-y-0 left-0 z-40 flex w-20 flex-col items-center bg-[#f2f4f6] py-4 text-slate-400">
+      <div className="mb-4 p-2 font-['Manrope'] text-[11px] font-black tracking-tight text-[#3525cd]">
+        NEST
       </div>
 
-      {/* Menu */}
-      <nav className="flex-1 space-y-2 overflow-y-auto px-4 py-6">
+      <nav className="flex flex-1 flex-col items-center gap-2 overflow-y-auto px-2 text-11px">
         {menuItems
           .filter((item) => item.roles.includes(role))
-          .map((item, index) => {
-            const isActive = location.pathname === item.path;
+          .map((item) => {
+            const Icon = item.icon;
+            const isActive =
+              (location.pathname === "/dashboard" && item.name === "Home") ||
+              (location.pathname === "/employees" && item.name === "Me") ||
+              (location.pathname === "/departments" && item.name === "Org") ||
+              (location.pathname === "/projects" && item.name === "Performance");
 
             return (
-              <div
-                key={index}
-                onClick={() => Navigate(item.path)}
-                className={`group flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-semibold transition cursor-pointer ${
+              <button
+                key={item.name}
+                type="button"
+                onClick={() => navigate(item.path)}
+                className={`flex min-h-10 w-16 flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 text-[11px] font-bold transition ${
                   isActive
-                    ? "bg-(--accent-soft) text-(--accent) shadow-(--shadow-soft)"
-                    : "text-(--text) hover:bg-(--surface-2)"
+                    ? "bg-white text-[#3525cd] shadow-sm"
+                    : "hover:bg-white/70 hover:text-[#3525cd]"
                 }`}
               >
-                <span className={`${isActive ? "text-(--accent)" : "text-(--text-muted)"} transition`}>
-                  {item.icon}
-                </span>
-                <span>{item.name}</span>
-              </div>
+                <Icon size={18} fill={isActive ? "currentColor" : "none"} />
+                <span className="truncate leading-tight">{item.name}</span>
+              </button>
             );
           })}
       </nav>
 
-      {/* Logout */}
-      <div className="p-4 border-t border-(--border)">
-        <button
-          type="button"
-          onClick={handleLogOut}
-          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-semibold text-red-500 hover:bg-red-50 transition w-full text-left"
-        >
-          <LogOut size={18} />
-          <span className="text-sm font-medium">Logout</span>
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={handleLogOut}
+        className="mt-3 flex min-h-10 w-16 flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 text-[11px] font-bold text-red-500 transition hover:bg-white"
+      >
+        <LogOut size={18} />
+        Logout
+      </button>
     </aside>
   );
 }

@@ -1,37 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f5f3ef;
-  --surface: #ffffff;
-  --surface-2: #f1f5f9;
-  --surface-3: #e7eef4;
-  --text: #0f172a;
-  --text-muted: #5b6472;
-  --border: #e2e8f0;
-  --accent: #0f766e;
-  --accent-strong: #0ea5a4;
-  --accent-soft: #dbf3ef;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-soft: #e7e5ff;
+  --primary-ink: #211d9a;
+  --secondary: #0d9488;
+  --secondary-soft: #ccfbf1;
+  --tertiary: #7c3aed;
+  --tertiary-soft: #ede9fe;
+  --neutral: #f8fafc;
+  --bg: #d9dddf;
+  --surface: #f8fafc;
+  --surface-2: #eef0f2;
+  --surface-3: #e3e6ea;
+  --text: #191c1e;
+  --text-muted: #858b98;
+  --border: #cfd5df;
+  --accent: var(--primary);
+  --accent-strong: var(--primary-hover);
+  --accent-soft: var(--primary-soft);
+  --success: var(--secondary);
+  --success-soft: var(--secondary-soft);
   --warning: #f59e0b;
-  --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.08);
-  --shadow-strong: 0 24px 60px rgba(15, 23, 42, 0.12);
-  --font-sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-display: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --focus-ring: 0 0 0 3px rgba(79, 70, 229, 0.14);
+  --shadow-soft: 0 6px 16px rgba(24, 28, 35, 0.07);
+  --shadow-strong: 0 18px 44px rgba(24, 28, 35, 0.14);
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.875rem;
+  --font-sans: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Manrope", "Inter", "Segoe UI", sans-serif;
 }
 
 .theme-dark {
-  --bg: #0b1220;
-  --surface: #0f172a;
-  --surface-2: #111c2e;
-  --surface-3: #172338;
-  --text: #e2e8f0;
-  --text-muted: #94a3b8;
-  --border: #243146;
-  --accent: #2dd4bf;
-  --accent-strong: #5eead4;
-  --accent-soft: rgba(45, 212, 191, 0.15);
-  --warning: #fbbf24;
-  --shadow-soft: 0 12px 30px rgba(2, 6, 23, 0.35);
-  --shadow-strong: 0 24px 60px rgba(2, 6, 23, 0.5);
+  --bg: #1f2330;
+  --surface: #282d3a;
+  --surface-2: #303644;
+  --surface-3: #3a4050;
+  --text: #f8fafc;
+  --text-muted: #b7bcc9;
+  --border: #4a5061;
+  --accent: #a5b4fc;
+  --accent-strong: #c4b5fd;
+  --accent-soft: rgba(79, 70, 229, 0.28);
+  --success: #5eead4;
+  --success-soft: rgba(13, 148, 136, 0.28);
+  --danger-soft: rgba(220, 38, 38, 0.2);
+  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.28);
+  --shadow-strong: 0 28px 70px rgba(0, 0, 0, 0.42);
 }
 
 * {
@@ -41,7 +60,12 @@
 html,
 body,
 #root {
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
 }
 
@@ -49,10 +73,12 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  min-height: 100vh;
-  background-image:
-    radial-gradient(900px 420px at 10% -10%, rgba(14, 165, 164, 0.18), transparent 60%),
-    radial-gradient(700px 340px at 100% 0%, rgba(245, 158, 11, 0.18), transparent 55%);
+  font-size: 13px;
+  height: 100%; 
+  background-image: linear-gradient(135deg, rgba(79, 70, 229, 0.08), transparent 34%),
+    linear-gradient(rgba(25, 28, 30, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(25, 28, 30, 0.035) 1px, transparent 1px);
+  background-size: auto, 24px 24px, 24px 24px;
   background-attachment: fixed;
 }
 
@@ -62,7 +88,7 @@ h3,
 h4,
 h5 {
   font-family: var(--font-display);
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 a {
@@ -70,5 +96,114 @@ a {
 }
 
 ::selection {
-  background: rgba(14, 165, 164, 0.25);
+  background: rgba(79, 70, 229, 0.22);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+input,
+select,
+textarea,
+table {
+  font-size: 13px;
+}
+
+input,
+select {
+  min-height: 2.25rem;
+}
+
+button svg,
+a svg {
+  height: 1rem;
+  width: 1rem;
+}
+
+@media (min-width: 768px) {
+  button svg,
+  a svg {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+input,
+select,
+textarea {
+  border-radius: var(--radius-md);
+}
+
+th,
+td {
+  height: 2.5rem;
+}
+
+@layer components {
+  .ds-card {
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 92%, white);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .ds-button {
+    align-items: center;
+    border-radius: var(--radius-md);
+    display: inline-flex;
+    font-size: 0.875rem;
+    font-weight: 700;
+    min-height: 2rem;
+    padding-inline: 0.75rem;
+    justify-content: center;
+    transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+  }
+
+  .ds-button:active {
+    transform: scale(0.98);
+  }
+
+  .ds-button-primary {
+    background: var(--primary);
+    color: white;
+  }
+
+  .ds-button-primary:hover {
+    background: var(--primary-hover);
+  }
+
+  .ds-button-secondary {
+    background: var(--surface-2);
+    color: var(--text);
+  }
+
+  .ds-button-secondary:hover {
+    background: var(--surface-3);
+  }
+
+  .ds-pill {
+    align-items: center;
+    background: var(--accent-soft);
+    border-radius: 999px;
+    color: var(--primary-ink);
+    display: inline-flex;
+    font-size: 0.75rem;
+    font-weight: 700;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+  }
 }

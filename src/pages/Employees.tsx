@@ -413,18 +413,18 @@ export default function Employees() {
       {toast && (
         <div className="fixed right-4 top-4 z-50 max-w-sm">
           <div
-            className={`flex items-start gap-3 rounded-xl border px-4 py-3 shadow-lg ${
+            className={`flex items-start gap-3 rounded-lg border px-4 py-3 shadow-lg ${
               toast.type === "success"
-                ? "border-emerald-200 bg-emerald-50 text-emerald-900"
-                : "border-red-200 bg-red-50 text-red-900"
+                ? "border-(--success) bg-(--success-soft) text-(--text)"
+                : "border-(--danger) bg-(--danger-soft) text-(--text)"
             }`}
             role="status"
             aria-live="polite"
           >
             {toast.type === "success" ? (
-              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-(--success)" />
             ) : (
-              <CircleAlert className="mt-0.5 h-5 w-5 shrink-0 text-red-600" />
+              <CircleAlert className="mt-0.5 h-5 w-5 shrink-0 text-(--danger)" />
             )}
 
             <div className="min-w-0 flex-1 text-sm font-medium">
@@ -434,7 +434,7 @@ export default function Employees() {
             <button
               type="button"
               onClick={() => setToast(null)}
-              className="rounded p-1 text-current/70 transition hover:bg-black/5 hover:text-current"
+              className="rounded p-1 text-current/70 transition hover:bg-(--surface-3) hover:text-current"
               aria-label="Dismiss notification"
             >
               <X className="h-4 w-4" />
@@ -444,7 +444,7 @@ export default function Employees() {
       )}
 
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">
+        <h1 className="text-xl font-semibold">
           {role === "Admin" && "Workforce Management"}
           {role === "Manager" && "Department Employees"}
           {role === "Employee" && "My Department"}
@@ -452,7 +452,7 @@ export default function Employees() {
 
         {(role === "Admin" || role === "Manager") && (
           <button
-            className="bg-blue-600 text-white px-2 py-2 rounded-lg"
+            className="ds-button ds-button-primary h-8 px-3 text-sm"
             onClick={() => setShowCreateCard((prev) => !prev)}
           >
             {showCreateCard ? "Close" : "Create User"}
@@ -466,19 +466,19 @@ export default function Employees() {
         </div>
       )}
       {departmentError && role === "Admin" && (
-        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
+        <div className="rounded-lg border border-(--tertiary) bg-(--tertiary-soft) px-4 py-3 text-sm text-(--tertiary)">
           {departmentError}
         </div>
       )}
 
       {(role === "Admin" || role === "Manager") && showCreateCard && (
-        <div className="bg-(--surface) p-3 rounded-lg shadow space-y-2">
-          <h2 className="text-lg font-semibold">Create User</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="ds-card space-y-2 p-4">
+          <h2 className="text-sm font-semibold">Create User</h2>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             <div>
-              <label className="text-sm text-(--text-muted)">Name</label>
+              <label className="text-[12px] text-(--text-muted)">Name</label>
               <input
-                className="w-full border border-(--border) bg-(--surface) text-(--text) placeholder:text-(--text-muted) p-2 rounded mt-1"
+                className="mt-1 h-9 w-full rounded border border-(--border) bg-(--surface) px-3 text-(--text) placeholder:text-(--text-muted)"
                 value={createForm.username}
                 onChange={(e) =>
                   setCreateForm({ ...createForm, username: e.target.value })
@@ -488,10 +488,10 @@ export default function Employees() {
             </div>
 
             <div>
-              <label className="text-sm text-(--text-muted)">Email</label>
+              <label className="text-[12px] text-(--text-muted)">Email</label>
               <input
                 type="email"
-                className="w-full border border-(--border) bg-(--surface) text-(--text) placeholder:text-(--text-muted) p-2 rounded mt-1"
+                className="mt-1 h-9 w-full rounded border border-(--border) bg-(--surface) px-3 text-(--text) placeholder:text-(--text-muted)"
                 value={createForm.email}
                 onChange={(e) =>
                   setCreateForm({ ...createForm, email: e.target.value })
@@ -502,9 +502,9 @@ export default function Employees() {
 
             {role === "Admin" && (
               <div>
-                <label className="text-sm text-(--text-muted)">Role</label>
+                <label className="text-[12px] text-(--text-muted)">Role</label>
                 <select
-                  className="w-full border border-(--border) bg-(--surface) text-(--text) p-2 rounded mt-1"
+                  className="mt-1 h-9 w-full rounded border border-(--border) bg-(--surface) px-3 text-(--text)"
                   value={createForm.role}
                   onChange={(e) =>
                     setCreateForm({
@@ -522,11 +522,11 @@ export default function Employees() {
 
             {role === "Admin" && (
               <div>
-                <label className="text-sm text-(--text-muted)">
+                <label className="text-[12px] text-(--text-muted)">
                   Department
                 </label>
                 <select
-                  className="w-full border border-(--border) bg-(--surface) text-(--text) p-2 rounded mt-1"
+                  className="mt-1 h-9 w-full rounded border border-(--border) bg-(--surface) px-3 text-(--text)"
                   value={createForm.departmentId}
                   onChange={(e) =>
                     setCreateForm({
@@ -550,7 +550,7 @@ export default function Employees() {
               </div>
             )}
             {role === "Manager" && (
-              <div className="text-sm text-(--text-muted)">
+              <div className="text-[13px] text-(--text-muted)">
                 New users will be created as Employee in your department.
               </div>
             )}
@@ -558,7 +558,7 @@ export default function Employees() {
 
           <div className="flex justify-end">
             <button
-              className="bg-green-600 text-white px-4 py-2 rounded-lg disabled:opacity-60"
+              className="ds-button ds-button-primary h-8 px-3 text-sm disabled:opacity-60"
               onClick={handleCreateUser}
               disabled={creating}
             >
@@ -569,16 +569,16 @@ export default function Employees() {
       )}
 
 
-      <div className="flex flex-wrap gap-4 rounded-lg bg-(--surface) p-3 shadow">
+      <div className="ds-card flex flex-wrap gap-3 p-3">
         <input
           type="text" placeholder="Search users..."
-          className="border border-(--border) bg-(--surface) text-(--text) placeholder:text-(--text-muted) px-3 py-2 rounded-lg w-64"
+          className="h-9 w-64 rounded-lg border border-(--border) bg-(--surface) px-3 text-(--text) placeholder:text-(--text-muted)"
           value={search}
           onChange={(e) => setSearch(e.target.value)}/>
 
         {role === "Admin" && (
           <select
-            className="border border-(--border) bg-(--surface) text-(--text) px-3 py-2 rounded-lg"
+            className="h-9 rounded-lg border border-(--border) bg-(--surface) px-3 text-(--text)"
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}>
             <option value="">All Roles</option>
@@ -588,7 +588,7 @@ export default function Employees() {
         )}
 
         <select
-          className="border border-(--border) bg-(--surface) text-(--text) px-3 py-2 rounded-lg"
+          className="h-9 rounded-lg border border-(--border) bg-(--surface) px-3 text-(--text)"
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}>
           <option value="">Sort By</option>
@@ -599,42 +599,42 @@ export default function Employees() {
       </div>
 
       
-      <div className="overflow-x-auto rounded-lg bg-(--surface) shadow">
-        <table className="w-full min-w-[720px] text-left">
+      <div className="ds-card overflow-x-auto">
+        <table className="w-full min-w-[720px] text-left text-[13px]">
           <thead className="bg-(--surface-2)">
             <tr>
-              <th className="p-3">S.No</th>
-              <th className="p-3">Name</th>
-              <th className="p-3">Email</th>
-              <th className="p-3">Role</th>
-              <th className="p-3">Status</th>
-              {role === "Admin" && <th className="p-3">Actions</th>}
-              {role === "Manager" && <th className="p-3">Actions</th>}
-              {role === "Admin" && <th className="p-3">Department</th>}
+              <th className="h-10 px-3 py-2">S.No</th>
+              <th className="h-10 px-3 py-2">Name</th>
+              <th className="h-10 px-3 py-2">Email</th>
+              <th className="h-10 px-3 py-2">Role</th>
+              <th className="h-10 px-3 py-2">Status</th>
+              {role === "Admin" && <th className="h-10 px-3 py-2">Actions</th>}
+              {role === "Manager" && <th className="h-10 px-3 py-2">Actions</th>}
+              {role === "Admin" && <th className="h-10 px-3 py-2">Department</th>}
             </tr>
           </thead>
 
           <tbody>
             {paginatedUsers.map((user, index) => (
               <tr key={user.id} className="border-t border-(--border) hover:bg-(--surface-2)">
-                <td className="p-3">{startIndex + index + 1}</td>
+                <td className="h-10 px-3 py-2">{startIndex + index + 1}</td>
 
-                <td className="p-3">{user.username}</td>
+                <td className="h-10 px-3 py-2">{user.username}</td>
 
-                <td className="p-3">{user.email}</td>
+                <td className="h-10 px-3 py-2">{user.email}</td>
 
-                <td className="p-3">
-                  <span className="px-2 py-1 bg-blue-100 text-blue-600 rounded text-sm">
+                <td className="h-10 px-3 py-2">
+                  <span className="rounded bg-(--primary-soft) px-2 py-1 text-[12px] text-(--primary)">
                     {user.role?.name || "Employee"}
                   </span>
                 </td>
 
-                <td className="p-3">
+                <td className="h-10 px-3 py-2">
                   <span
-                    className={`px-2 py-1 rounded text-sm ${
+                    className={`rounded px-2 py-1 text-[12px] ${
                       user.isActive
-                        ? "bg-green-100 text-green-600"
-                        : "bg-red-100 text-red-600"
+                        ? "bg-(--success-soft) text-(--success)"
+                        : "bg-(--danger-soft) text-(--danger)"
                     }`}
                   >
                     {user.isActive ? "Active" : "Inactive"}
@@ -642,11 +642,11 @@ export default function Employees() {
                 </td>
 
                 {role === "Admin" && (
-                  <td className="p-3">
+                  <td className="h-10 px-3 py-2">
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setEditingUser(user)}
-                        className="inline-flex items-center gap-2 rounded-lg border border-blue-100 bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-700 transition hover:bg-blue-100"
+                        className="inline-flex h-8 items-center gap-2 rounded-lg border border-(--border) bg-(--primary-soft) px-3 text-sm font-semibold text-(--primary) transition hover:bg-(--surface-3)"
                       >
                         <Edit size={14} />
                         Edit
@@ -654,7 +654,7 @@ export default function Employees() {
 
                       <button
                         onClick={() => setPendingDeleteUser(user)}
-                        className="inline-flex items-center gap-2 rounded-lg border border-red-100 bg-red-50 px-3 py-1.5 text-sm font-semibold text-red-600 transition hover:bg-red-100"
+                        className="inline-flex h-8 items-center gap-2 rounded-lg border border-(--border) bg-(--danger-soft) px-3 text-sm font-semibold text-(--danger) transition hover:bg-(--surface-3)"
                       >
                         <Trash size={14} />
                         Delete
@@ -663,18 +663,18 @@ export default function Employees() {
                   </td>
                 )}
                 {role === "Manager" && (
-                  <td className="p-3">
+                  <td className="h-10 px-3 py-2">
                     <button
                       onClick={() => handleToggleStatus(user)}
-                      className="text-indigo-600 hover:underline"
+                      className="text-(--primary) hover:underline"
                     >
                       {user.isActive ? "Set Inactive" : "Set Active"}
                     </button>
                   </td>
                 )}
                 {role === "Admin" && (
-                  <td className="p-3">
-                    <span className="rounded px-2 py-1 text-sm bg-purple-100 text-purple-600">
+                  <td className="h-10 px-3 py-2">
+                    <span className="rounded bg-(--tertiary-soft) px-2 py-1 text-[12px] text-(--tertiary)">
                       {user.department?.name || "Not Assigned"}
                     </span>
                   </td>
@@ -684,7 +684,7 @@ export default function Employees() {
             {paginatedUsers.length === 0 && (
               <tr>
                 <td
-                  className="p-6 text-center text-sm text-(--text-muted)"
+                  className="h-10 px-3 py-2 text-center text-[13px] text-(--text-muted)"
                   colSpan={role === "Admin" ? 7 : 6}
                 >
                   No users found.
@@ -716,7 +716,7 @@ export default function Employees() {
               key={page}
               className={`px-3 py-1 rounded border border-(--border) text-sm ${
                 page === currentPage
-                  ? "bg-blue-600 text-white border-blue-600"
+                  ? "border-(--primary) bg-(--primary) text-white"
                   : "bg-(--surface) text-(--text)"
               }`}
               onClick={() => setCurrentPage(page)}
@@ -739,11 +739,11 @@ export default function Employees() {
 
       {editingUser && (
         <div className="fixed inset-0 backdrop-blur-lg flex items-center justify-center">
-          <div className="bg-(--surface) p-6 rounded-lg shadow w-96 space-y-4 cursor-pointer">
-            <h2 className="text-lg font-semibold">Edit User</h2>
+          <div className="ds-card w-96 cursor-pointer space-y-3 p-3 md:p-4">
+            <h2 className="text-sm font-semibold">Edit User</h2>
 
             <input
-              className="w-full border border-(--border) bg-(--surface) text-(--text) p-2 rounded"
+              className="h-9 w-full rounded border border-(--border) bg-(--surface) px-3 text-(--text)"
               value={editingUser.username}
               onChange={(e) =>
                 setEditingUser({ ...editingUser, username: e.target.value })
@@ -751,7 +751,7 @@ export default function Employees() {
             />
 
             <input
-              className="w-full border border-(--border) bg-(--surface) text-(--text) p-2 rounded"
+              className="h-9 w-full rounded border border-(--border) bg-(--surface) px-3 text-(--text)"
               value={editingUser.email}
               onChange={(e) =>
                 setEditingUser({ ...editingUser, email: e.target.value })
@@ -759,7 +759,7 @@ export default function Employees() {
             />
 
             <select
-              className="w-full border border-(--border) bg-(--surface) text-(--text) p-2 rounded"
+              className="h-9 w-full rounded border border-(--border) bg-(--surface) px-3 text-(--text)"
               value={editingUser.role?.name}
               onChange={(e) =>
                 setEditingUser({
@@ -774,7 +774,7 @@ export default function Employees() {
             </select>
 
             <select
-              className="w-full border border-(--border) bg-(--surface) text-(--text) p-2 rounded"
+              className="h-9 w-full rounded border border-(--border) bg-(--surface) px-3 text-(--text)"
               value={editingUser.department?.id || ""}
               onChange={(e) =>
                 setEditingUser({
@@ -801,7 +801,7 @@ export default function Employees() {
             </select>
 
             <select
-              className="w-full border border-(--border) bg-(--surface) text-(--text) p-2 rounded"
+              className="h-9 w-full rounded border border-(--border) bg-(--surface) px-3 text-(--text)"
               value={editingUser.isActive ? "active" : "inactive"}
               onChange={(e) =>
                 setEditingUser({
@@ -819,7 +819,7 @@ export default function Employees() {
 
               <button
                 onClick={handleUpdate}
-                className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer"
+                className="ds-button ds-button-primary h-8 cursor-pointer px-3 text-sm"
               >
                 Save
               </button>
@@ -829,9 +829,9 @@ export default function Employees() {
       )}
 
       {pendingDeleteUser && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-          <div className="w-full max-w-sm rounded-2xl bg-(--surface) p-6 shadow-(--shadow-strong)">
-            <h3 className="text-lg font-semibold">Delete user?</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#191c1e]/40 p-4">
+          <div className="ds-card w-full max-w-sm p-3 shadow-(--shadow-strong) md:p-4">
+            <h3 className="text-sm font-semibold">Delete user?</h3>
             <p className="mt-2 text-sm text-(--text-muted)">
               Are you sure you want to delete{" "}
               <span className="font-semibold text-(--text)">
@@ -840,15 +840,15 @@ export default function Employees() {
               ? This action cannot be undone.
             </p>
 
-            <div className="mt-6 flex justify-end gap-3">
+            <div className="mt-4 flex justify-end gap-3">
               <button
-                className="rounded-lg border border-(--border) px-4 py-2 text-sm font-semibold text-(--text)"
+                className="h-8 rounded-lg border border-(--border) px-3 text-sm font-semibold text-(--text)"
                 onClick={() => setPendingDeleteUser(null)}
               >
                 Cancel
               </button>
               <button
-                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700"
+                className="ds-button h-8 rounded-lg bg-(--danger) px-3 text-sm font-semibold text-white hover:opacity-90"
                 onClick={async () => {
                   await deleteUser(pendingDeleteUser.localUserId || pendingDeleteUser.id);
                   setPendingDeleteUser(null);
