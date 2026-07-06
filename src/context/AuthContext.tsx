@@ -15,12 +15,18 @@ type AuthUser = {
   name?: string;
   email?: string;
   role?: { name?: string } | string | null;
+  tenant?: {
+    id?: string;
+    name?: string;
+    slug?: string;
+  } | null;
 };
 
 type AuthContextValue = {
   token: string | null;
   role: AppRole;
   userName: string;
+  companyName: string;
   loading: boolean;
   isAuthenticated: boolean;
   signIn: (payload: { token: string; user?: AuthUser | null }) => void;
@@ -33,6 +39,8 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 const getStoredName = () =>
   localStorage.getItem("username") || localStorage.getItem("name") || "User";
+
+const getStoredCompanyName = () => localStorage.getItem("companyName") || "";
 
 const parseTokenPayload = (token: string) => {
   try {
@@ -96,6 +104,11 @@ const extractRoleFromUser = (user?: AuthUser | null) => {
   return normalizeRole(extractRoleValue(user?.role));
 };
 
+const extractCompanyNameFromUser = (user?: AuthUser | null) => {
+  const name = user?.tenant?.name;
+  return typeof name === "string" && name.trim() ? name.trim() : null;
+};
+
 const resolveRoleFromToken = (token: string | null): AppRole => {
   if (!token) return "Employee";
   const payload = parseTokenPayload(token);
@@ -126,6 +139,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   );
   const [role, setRole] = useState<AppRole>(() => resolveRole(token));
   const [userName, setUserName] = useState<string>(() => getStoredName());
+  const [companyName, setCompanyName] = useState<string>(() => getStoredCompanyName());
   const [loading, setLoading] = useState(true);
 
   const signOut = useCallback(() => {
@@ -133,9 +147,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.removeItem("role");
     localStorage.removeItem("username");
     localStorage.removeItem("name");
+    localStorage.removeItem("companyName");
     setToken(null);
     setRole("Employee");
     setUserName("User");
+    setCompanyName("");
   }, []);
 
   const signIn = useCallback(
@@ -154,8 +170,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         extractNameFromTokenPayload(tokenPayload),
         getStoredName(),
       ]);
+      const nextCompanyName =
+        extractCompanyNameFromUser(payload.user) || getStoredCompanyName();
       localStorage.setItem("username", nextName);
       setUserName(nextName);
+      if (nextCompanyName) {
+        localStorage.setItem("companyName", nextCompanyName);
+      }
+      setCompanyName(nextCompanyName);
     },
     []
   );
@@ -179,10 +201,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         extractNameFromTokenPayload(payload),
         getStoredName(),
       ]);
+      const nextCompanyName =
+        extractCompanyNameFromUser(data) || getStoredCompanyName();
       const nextRole = extractRoleFromUser(data) || resolveRoleFromToken(token);
 
       localStorage.setItem("username", nextName);
       setUserName(nextName);
+      if (nextCompanyName) {
+        localStorage.setItem("companyName", nextCompanyName);
+      }
+      setCompanyName(nextCompanyName);
 
       localStorage.setItem("role", nextRole);
       setRole(nextRole);
@@ -204,6 +232,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (event.key === "username") {
         setUserName(event.newValue || "User");
       }
+      if (event.key === "companyName") {
+        setCompanyName(event.newValue || "");
+      }
     };
 
     window.addEventListener("storage", handleStorage);
@@ -217,6 +248,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (!token) {
         setRole(resolveRole(null));
         setUserName(getStoredName());
+        setCompanyName(getStoredCompanyName());
         setLoading(false);
         return;
       }
@@ -235,6 +267,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           getStoredName(),
         ])
       );
+      setCompanyName(getStoredCompanyName());
       setLoading(true);
       await refreshProfile();
       if (active) {
@@ -255,6 +288,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       token,
       role,
       userName,
+      companyName,
       loading,
       isAuthenticated,
       signIn,
@@ -262,7 +296,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       refreshProfile,
       hasRole: (roles: AppRole[]) => roles.includes(role),
     };
-  }, [token, role, userName, loading, signIn, signOut, refreshProfile]);
+  }, [token, role, userName, companyName, loading, signIn, signOut, refreshProfile]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

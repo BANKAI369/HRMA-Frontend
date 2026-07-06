@@ -46,26 +46,16 @@ const valueProps = [
 
 function PrimaryButton({
   children,
-<<<<<<< HEAD
   to,
   className = "",
 }: {
   children: ReactNode;
   to: string;
-=======
-  className = "",
-}: {
-  children: ReactNode;
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
   className?: string;
 }) {
   return (
     <Link
-<<<<<<< HEAD
       to={to}
-=======
-      to="/"
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
       className={`ds-button ds-button-primary shadow-(--shadow-soft) ${className}`}
       style={{ color: "white" }}
     >
@@ -80,11 +70,7 @@ export default function LandingPage() {
       className="min-h-screen text-(--text)"
       style={{
         background: "var(--surface)",
-<<<<<<< HEAD
         fontFamily: "Proxima Nova, Segoe UI, Helvetica Neue, Arial, sans-serif",
-=======
-        fontFamily: "Inter, Segoe UI, sans-serif",
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
       }}
     >
       <nav className="fixed top-0 z-50 w-full border-b border-(--border) bg-(--surface)/90 shadow-sm backdrop-blur-xl">
@@ -128,14 +114,10 @@ export default function LandingPage() {
             >
               Login
             </Link>
-<<<<<<< HEAD
             <PrimaryButton
               to="/signup?mode=trial"
               className="rounded-lg px-4 py-2.5 font-['Manrope'] text-sm font-semibold text-white sm:px-6"
             >
-=======
-            <PrimaryButton className="rounded-lg px-4 py-2.5 font-['Manrope'] text-sm font-semibold text-white sm:px-6">
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
               Get Free Trial
             </PrimaryButton>
             <a
@@ -164,7 +146,6 @@ export default function LandingPage() {
                 beyond spreadsheets into a world of automated excellence.
               </p>
               <div className="flex flex-wrap gap-4">
-<<<<<<< HEAD
                 <PrimaryButton
                   to="/signup?mode=trial"
                   className="rounded-xl px-8 py-4 font-['Manrope'] text-lg font-bold"
@@ -177,17 +158,6 @@ export default function LandingPage() {
                 >
                   Request Demo
                 </Link>
-=======
-                <PrimaryButton className="rounded-xl px-8 py-4 font-['Manrope'] text-lg font-bold">
-                  Start Free Trial
-                </PrimaryButton>
-                <a
-                  href="#products"
-                  className="ds-button ds-button-secondary px-8 py-4 font-['Manrope'] text-lg"
-                >
-                  Watch Demo
-                </a>
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
               </div>
             </div>
 
@@ -270,11 +240,7 @@ export default function LandingPage() {
                   asset: their people.
                 </p>
                 <Link
-<<<<<<< HEAD
                   to="/signup?mode=trial"
-=======
-                  to="/"
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
                   className="ds-button ds-button-primary px-10 py-5 font-['Manrope'] text-lg font-bold hover:-translate-y-1 hover:shadow-xl sm:text-xl"
                   style={{ color: "white" }}
                 >

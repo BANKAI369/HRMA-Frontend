@@ -138,8 +138,8 @@ export default function Dashboard() {
           </nav>
         </div>
 
-        <div className="grid grid-cols-12 gap-4 pt-4">
-          <div className="col-span-12 space-y-4 xl:col-span-8">
+        <div className="grid gap-4 pt-4 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+          <div className="space-y-4">
             <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end">
               <div>
                 <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[#006a61]">
@@ -323,67 +323,71 @@ export default function Dashboard() {
               </div>
             </section>
 
-            <section className="space-y-5">
-              <h2 className="font-['Manrope'] text-sm font-bold">Recent Activity</h2>
-              {dashboardActivities.map((activity) => (
-                <article
-                  key={`${activity.author}-${activity.time}`}
-                  className="rounded-xl border border-transparent bg-white p-3 shadow-sm transition hover:border-[#c7c4d8]/50 md:p-4"
-                >
-                  <div className="flex gap-3">
-                    <div
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                        activity.variant === "praise"
-                          ? "bg-[#86f2e4] text-[#006f66]"
-                          : "bg-[#c3c0ff] text-[#0f0069]"
-                      }`}
-                    >
-                      {activity.initials}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="mb-1 flex items-center gap-2">
-                        <span className="font-bold">{activity.author}</span>
-                        <span className="text-xs text-slate-400">{activity.time}</span>
+            <section className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="font-['Manrope'] text-sm font-bold">Recent Activity</h2>
+              </div>
+              <div className="space-y-4">
+                {dashboardActivities.map((activity) => (
+                  <article
+                    key={`${activity.author}-${activity.time}`}
+                    className="rounded-xl border border-transparent bg-white p-3 shadow-sm transition hover:border-[#c7c4d8]/50 md:p-4"
+                  >
+                    <div className="flex gap-3">
+                      <div
+                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+                          activity.variant === "praise"
+                            ? "bg-[#86f2e4] text-[#006f66]"
+                            : "bg-[#c3c0ff] text-[#0f0069]"
+                        }`}
+                      >
+                        {activity.initials}
                       </div>
-                      {activity.variant === "praise" ? (
-                        <div className="mb-3 rounded-xl border border-[#d2bbff]/40 bg-[#d2bbff]/20 p-3">
-                          <div className="mb-2 flex items-center gap-2">
-                            <Sparkles className="text-[#5c00ca]" size={16} fill="currentColor" />
-                            <span className="text-xs font-bold uppercase tracking-wider text-[#5c00ca]">
-                              {activity.praiseLabel}
-                            </span>
-                          </div>
-                          <p className="italic text-[#25005a]">{activity.body}</p>
+                      <div className="min-w-0 flex-1">
+                        <div className="mb-1 flex items-center gap-2">
+                          <span className="font-bold">{activity.author}</span>
+                          <span className="text-xs text-slate-400">{activity.time}</span>
                         </div>
-                      ) : (
-                        <p className="mb-4 text-slate-600">{activity.body}</p>
-                      )}
-                      <div className="flex items-center gap-3">
-                        <button
-                          className={`flex items-center gap-1.5 text-sm ${
-                            activity.variant === "praise"
-                              ? "font-bold text-[#3525cd]"
-                              : "font-medium text-slate-500 transition hover:text-[#3525cd]"
-                          }`}
-                        >
-                          <Heart
-                            size={18}
-                            fill={activity.variant === "praise" ? "currentColor" : "none"}
-                          />{" "}
-                          {activity.likes}
-                        </button>
-                        <button className="flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-[#3525cd]">
-                          <MessageCircle size={18} /> {activity.comments}
-                        </button>
+                        {activity.variant === "praise" ? (
+                          <div className="mb-3 rounded-xl border border-[#d2bbff]/40 bg-[#d2bbff]/20 p-3">
+                            <div className="mb-2 flex items-center gap-2">
+                              <Sparkles className="text-[#5c00ca]" size={16} fill="currentColor" />
+                              <span className="text-xs font-bold uppercase tracking-wider text-[#5c00ca]">
+                                {activity.praiseLabel}
+                              </span>
+                            </div>
+                            <p className="italic text-[#25005a]">{activity.body}</p>
+                          </div>
+                        ) : (
+                          <p className="mb-4 text-slate-600">{activity.body}</p>
+                        )}
+                        <div className="flex items-center gap-3">
+                          <button
+                            className={`flex items-center gap-1.5 text-sm ${
+                              activity.variant === "praise"
+                                ? "font-bold text-[#3525cd]"
+                                : "font-medium text-slate-500 transition hover:text-[#3525cd]"
+                            }`}
+                          >
+                            <Heart
+                              size={18}
+                              fill={activity.variant === "praise" ? "currentColor" : "none"}
+                            />{" "}
+                            {activity.likes}
+                          </button>
+                          <button className="flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-[#3525cd]">
+                            <MessageCircle size={18} /> {activity.comments}
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                ))}
+              </div>
             </section>
           </div>
 
-          <aside className="col-span-12 space-y-4 xl:col-span-4">
+          <aside className="space-y-4 lg:sticky lg:top-4">
             <div className="rounded-xl bg-white p-3 text-center shadow-sm md:p-4">
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-[#006a61]">
                 HRMA Workspace

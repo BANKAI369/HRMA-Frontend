@@ -10,14 +10,16 @@ export default function Navbar() {
     return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
   };
 
-  const { userName } = useAuth();
+  const { userName, companyName } = useAuth();
 
   return (
     <header className="fixed left-20 right-0 top-0 z-30 flex h-14 items-center justify-between bg-[#f7f9fb] px-4 text-[#191c1e] md:px-5">
       <div className="flex min-w-0 items-center gap-4">
-        <span className="font-['Manrope'] text-xl font-black tracking-tight text-[#191c1e]">
-          Company Name
-        </span>
+        {companyName ? (
+          <span className="font-['Manrope'] text-xl font-black tracking-tight text-[#191c1e]">
+            {companyName}
+          </span>
+        ) : null}
 
         <div className="relative hidden w-60 items-center md:flex">
           <Search className="absolute left-3 text-slate-400" size={17} />
