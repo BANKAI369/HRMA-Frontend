@@ -71,15 +71,12 @@ export const dashboardNavItems: DashboardNavItem[] = [
   { label: "Performance", icon: Star },
 ];
 
-<<<<<<< HEAD
-=======
 export const fallbackRecentUsers: DashboardPerson[] = [
   { id: "fallback-1", username: "Jane Doe", role: "Designer" },
   { id: "fallback-2", username: "Mike Kim", role: "Engineer" },
   { id: "fallback-3", username: "Alex Rivera", role: "Manager" },
 ];
 
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
 export const dashboardPostTools: DashboardPostTool[] = [
   { label: "Post", icon: FileText },
   { label: "Poll", icon: ClipboardCheck },
@@ -89,16 +86,14 @@ export const dashboardPostTools: DashboardPostTool[] = [
 export const dashboardAnnouncements: DashboardAnnouncement[] = [
   {
     title: "Q4 Strategy Kickoff: Moving Towards Nest 2.0",
-    description:
-      "Join us this Friday for an all-hands meeting regarding our new roadmap.",
+    description: "Join us this Friday for an all-hands meeting regarding our new roadmap.",
     badge: "Company News",
     meta: "Friday, 10:00 AM",
     variant: "primary",
   },
   {
     title: "New Remote Work Guidelines",
-    description:
-      "Updated flexibility clauses have been added to the employee handbook.",
+    description: "Updated flexibility clauses have been added to the employee handbook.",
     badge: "Policy Update",
     meta: "3 min read",
     variant: "policy",
@@ -108,11 +103,7 @@ export const dashboardAnnouncements: DashboardAnnouncement[] = [
 export const dashboardMilestones = [
   {
     label: "3 Years",
-<<<<<<< HEAD
-    fallbackName: "No recent joiners",
-=======
     fallbackName: "Alex Rivera",
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
     icon: PartyPopper,
     cardClassName: "bg-[#86f2e4]/30",
     iconClassName: "text-[#006a61]",
@@ -120,11 +111,7 @@ export const dashboardMilestones = [
   },
   {
     label: "New Joiner",
-<<<<<<< HEAD
-    fallbackName: "No recent joiners",
-=======
     fallbackName: "Sarah Chen",
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
     icon: Waves,
     cardClassName: "bg-[#e2dfff]",
     iconClassName: "text-[#3525cd]",
@@ -184,8 +171,7 @@ export const dashboardHoliday = {
 
 export const dashboardHelpCard = {
   title: "Need Help?",
-  description:
-    "Access HR policies, benefits guides, and employee handbooks instantly.",
+  description: "Access HR policies, benefits guides, and employee handbooks instantly.",
   cta: "Resource Center",
   icon: BookOpen,
 };

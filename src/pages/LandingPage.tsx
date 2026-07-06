@@ -46,26 +46,16 @@ const valueProps = [
 
 function PrimaryButton({
   children,
-<<<<<<< HEAD
   to,
   className = "",
 }: {
   children: ReactNode;
   to: string;
-=======
-  className = "",
-}: {
-  children: ReactNode;
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
   className?: string;
 }) {
   return (
     <Link
-<<<<<<< HEAD
       to={to}
-=======
-      to="/"
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
       className={`ds-button ds-button-primary shadow-(--shadow-soft) ${className}`}
       style={{ color: "white" }}
     >
@@ -80,11 +70,7 @@ export default function LandingPage() {
       className="min-h-screen text-(--text)"
       style={{
         background: "var(--surface)",
-<<<<<<< HEAD
         fontFamily: "Proxima Nova, Segoe UI, Helvetica Neue, Arial, sans-serif",
-=======
-        fontFamily: "Inter, Segoe UI, sans-serif",
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
       }}
     >
       <nav className="fixed top-0 z-50 w-full border-b border-(--border) bg-(--surface)/90 shadow-sm backdrop-blur-xl">
@@ -97,25 +83,13 @@ export default function LandingPage() {
           </Link>
 
           <div className="hidden items-center gap-8 font-['Manrope'] text-sm font-semibold md:flex">
-            <a
-              className="border-b-2 border-(--primary) pb-1"
-              href="#products"
-              style={{ color: "black" }}
-            >
+            <a className="border-b-2 border-(--primary) pb-1" href="#products" style={{ color: "black" }}>
               Products
             </a>
-            <a
-              className="transition-colors"
-              href="#pricing"
-              style={{ color: "black" }}
-            >
+            <a className="transition-colors" href="#pricing" style={{ color: "black" }}>
               Pricing
             </a>
-            <a
-              className="transition-colors"
-              href="#about"
-              style={{ color: "black" }}
-            >
+            <a className="transition-colors" href="#about" style={{ color: "black" }}>
               About
             </a>
           </div>
@@ -128,14 +102,10 @@ export default function LandingPage() {
             >
               Login
             </Link>
-<<<<<<< HEAD
             <PrimaryButton
               to="/signup?mode=trial"
               className="rounded-lg px-4 py-2.5 font-['Manrope'] text-sm font-semibold text-white sm:px-6"
             >
-=======
-            <PrimaryButton className="rounded-lg px-4 py-2.5 font-['Manrope'] text-sm font-semibold text-white sm:px-6">
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
               Get Free Trial
             </PrimaryButton>
             <a
@@ -153,9 +123,7 @@ export default function LandingPage() {
         <section className="relative overflow-hidden px-5 pb-28 pt-16 sm:px-8 lg:pt-20">
           <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2 lg:gap-16">
             <div className="relative z-10">
-              <span className="ds-pill mb-6 uppercase tracking-wider">
-                Introducing Nest
-              </span>
+              <span className="ds-pill mb-6 uppercase tracking-wider">Introducing Nest</span>
               <h1 className="mb-8 font-['Manrope'] text-5xl font-extrabold leading-[1.08] tracking-tight text-(--text) md:text-7xl">
                 The Future of <span className="text-(--primary)">People Management</span>
               </h1>
@@ -164,7 +132,6 @@ export default function LandingPage() {
                 beyond spreadsheets into a world of automated excellence.
               </p>
               <div className="flex flex-wrap gap-4">
-<<<<<<< HEAD
                 <PrimaryButton
                   to="/signup?mode=trial"
                   className="rounded-xl px-8 py-4 font-['Manrope'] text-lg font-bold"
@@ -177,17 +144,6 @@ export default function LandingPage() {
                 >
                   Request Demo
                 </Link>
-=======
-                <PrimaryButton className="rounded-xl px-8 py-4 font-['Manrope'] text-lg font-bold">
-                  Start Free Trial
-                </PrimaryButton>
-                <a
-                  href="#products"
-                  className="ds-button ds-button-secondary px-8 py-4 font-['Manrope'] text-lg"
-                >
-                  Watch Demo
-                </a>
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
               </div>
             </div>
 
@@ -216,10 +172,7 @@ export default function LandingPage() {
 
             <div className="grid gap-8 lg:grid-cols-12">
               {previewCards.map((card) => (
-                <article
-                  key={card.title}
-                  className={`${card.className} ds-card p-4`}
-                >
+                <article key={card.title} className={`${card.className} ds-card p-4`}>
                   <div className="overflow-hidden rounded-lg bg-(--surface-2)">
                     <img className={card.imageClassName} src={card.image} alt={card.alt} />
                   </div>
@@ -270,11 +223,7 @@ export default function LandingPage() {
                   asset: their people.
                 </p>
                 <Link
-<<<<<<< HEAD
                   to="/signup?mode=trial"
-=======
-                  to="/"
->>>>>>> 4f954d00228a6cdb61a109268ff6350f62afc286
                   className="ds-button ds-button-primary px-10 py-5 font-['Manrope'] text-lg font-bold hover:-translate-y-1 hover:shadow-xl sm:text-xl"
                   style={{ color: "white" }}
                 >
@@ -305,9 +254,7 @@ export default function LandingPage() {
               Contact
             </a>
           </div>
-          <p className="text-center text-xs text-(--text-muted)">
-            © 2026 Nest HR Technologies. All rights reserved.
-          </p>
+          <p className="text-center text-xs text-(--text-muted)">(c) 2026 Nest HR Technologies. All rights reserved.</p>
         </div>
       </footer>
     </div>
