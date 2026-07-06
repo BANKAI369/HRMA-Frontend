@@ -62,6 +62,7 @@ export default function Dashboard() {
   const [recentUsers, setRecentUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [currentTime, setCurrentTime] = useState(() => new Date());
 
   const { role, userName } = useAuth();
   const HelpIcon = dashboardHelpCard.icon;
@@ -99,6 +100,29 @@ export default function Dashboard() {
   useEffect(() => {
     loadCounts();
   }, [role]);
+
+  useEffect(() => {
+    const syncClock = () => setCurrentTime(new Date());
+    let intervalId: number | undefined;
+
+    syncClock();
+
+    const now = new Date();
+    const msUntilNextMinute =
+      (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
+
+    const timeoutId = window.setTimeout(() => {
+      syncClock();
+      intervalId = window.setInterval(syncClock, 60_000);
+    }, msUntilNextMinute);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (intervalId !== undefined) {
+        window.clearInterval(intervalId);
+      }
+    };
+  }, []);
 
   const people = recentUsers.length > 0 ? recentUsers : fallbackRecentUsers;
 
@@ -389,7 +413,7 @@ export default function Dashboard() {
                 HRMA Workspace
               </p>
               <h2 className="mb-2 font-['Manrope'] text-2xl font-black text-[#191c1e]">
-                {new Date().toLocaleTimeString("en-US", {
+                {currentTime.toLocaleTimeString("en-US", {
                   hour: "2-digit",
                   minute: "2-digit",
                 })}
