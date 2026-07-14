@@ -13,7 +13,7 @@ export default function Navbar() {
   const { userName, companyName } = useAuth();
 
   return (
-    <header className="fixed left-20 right-0 top-0 z-30 flex h-14 items-center justify-between bg-[#f7f9fb] px-4 text-[#191c1e] md:px-5">
+    <header className="fixed left-72 right-0 top-0 z-30 flex h-14 items-center justify-between bg-[#f7f9fb] px-4 text-[#191c1e] md:px-5">
       <div className="flex min-w-0 items-center gap-4">
         {companyName ? (
           <span className="font-['Manrope'] text-xl font-black tracking-tight text-[#191c1e]">

@@ -1,13 +1,12 @@
 import {
-  BarChart3,
+  Activity,
   Home,
-  LogOut,
-  Mail,
-  MessageSquare,
+  Inbox,
+  Megaphone,
+  Network,
   UserRound,
   Users,
   WalletCards,
-  Building2
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -32,7 +31,7 @@ const menuItems = [
   },
   {
     name: "Inbox",
-    icon: Mail,
+    icon: Inbox,
     roles: ["Admin", "Manager", "Employee"],
     path: "/dashboard",
   },
@@ -50,41 +49,60 @@ const menuItems = [
   },
   {
     name: "Org",
-    icon: Building2,
+    icon: Network,
     roles: ["Admin"],
     path: "/departments",
   },
   {
     name: "Engage",
-    icon: MessageSquare,
+    icon: Megaphone,
     roles: ["Admin", "Manager", "Employee"],
     path: "/dashboard",
   },
   {
     name: "Performance",
-    icon: BarChart3,
+    icon: Activity,
     roles: ["Manager", "Employee"],
     path: "/projects",
   },
 ];
 
+function getBrandInitials(companyName: string) {
+  const clean = companyName.trim();
+  if (!clean) return "N";
+  const parts = clean.split(/\s+/).filter(Boolean);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
+}
+
 export default function Sidebar({ role }: SidebarProps) {
-  const { signOut } = useAuth();
+  const { companyName } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleLogOut = () => {
-    signOut();
-    navigate("/signin");
-  };
+  const brandName = companyName || "Workspace";
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 flex w-20 flex-col items-center bg-[#f2f4f6] py-4 text-slate-400">
-      <div className="mb-4 p-2 font-['Manrope'] text-[11px] font-black tracking-tight text-[#3525cd]">
-        NEST
+    <aside className="fixed inset-y-0 left-0 z-40 flex w-72 flex-col overflow-y-auto bg-[#f2f4f6] text-slate-500">
+      <div className="p-8 pb-4">
+        <div className="flex items-center gap-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#3525cd] text-white shadow-sm">
+            <span className="text-[11px] font-black tracking-wide">
+              {getBrandInitials(brandName)}
+            </span>
+          </div>
+          <div>
+            <h2 className="font-['Manrope'] text-2xl font-bold text-[#3525cd]">
+              {brandName}
+            </h2>
+            <p className="font-['Manrope'] text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+              HR Ecosystem
+            </p>
+          </div>
+        </div>
       </div>
 
-      <nav className="flex flex-1 flex-col items-center gap-2 overflow-y-auto px-2 text-11px">
+      <nav className="flex flex-1 flex-col gap-2 px-6 pb-6">
         {menuItems
           .filter((item) => item.roles.includes(role))
           .map((item) => {
@@ -100,27 +118,19 @@ export default function Sidebar({ role }: SidebarProps) {
                 key={item.name}
                 type="button"
                 onClick={() => navigate(item.path)}
-                className={`flex min-h-10 w-16 flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 text-[11px] font-bold transition ${
+                className={`flex items-center gap-4 rounded-xl px-4 py-3 text-left font-['Manrope'] text-sm font-semibold tracking-tight transition-all duration-200 ${
                   isActive
                     ? "bg-white text-[#3525cd] shadow-sm"
-                    : "hover:bg-white/70 hover:text-[#3525cd]"
+                    : "text-slate-500 hover:bg-white/60 hover:text-[#3525cd]"
                 }`}
               >
                 <Icon size={18} fill={isActive ? "currentColor" : "none"} />
-                <span className="truncate leading-tight">{item.name}</span>
+                <span>{item.name}</span>
               </button>
             );
           })}
       </nav>
 
-      <button
-        type="button"
-        onClick={handleLogOut}
-        className="mt-3 flex min-h-10 w-16 flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 text-[11px] font-bold text-red-500 transition hover:bg-white"
-      >
-        <LogOut size={18} />
-        Logout
-      </button>
     </aside>
   );
 }
